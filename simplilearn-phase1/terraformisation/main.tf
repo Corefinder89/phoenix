@@ -59,12 +59,18 @@ resource "aws_instance" "terraformvm" {
    # install jenkins, java and python
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get -y update",
-      "sudo apt install wget",
-      "sudo apt-get -y install openjdk-8-jre-headless",
+      "export PATH=$PATH:/usr/bin",
+      # install java 8
+      "yes '' | sudo add-apt-repository ppa:webupd8team/java",
+      "sudo apt-get update",
+      "sudo apt-get -y install oracle-java8-installer",
+      "export JAVA_HOME=/usr/lib/jvm/java-8-oracle",
+      "sudo apt-get update",
+      "echo $JAVA_HOME",
+      "sudo apt install -y wget",
       "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
       "sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
-      "sudo apt-get update && sudo apt-get install jenkins -y",
+      "sudo apt-get -y update && sudo apt-get install jenkins -y",
       "sudo apt-get install -y python3-pip"
     ]
   }
