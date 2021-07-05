@@ -1,1 +1,6 @@
 .DS_Store
+simplilearn-phase1/terraformisation/.terraform.lock.hcl
+simplilearn-phase1/terraformisation/.terraform.tfstate.lock.info
+simplilearn-phase1/terraformisation/.terraform/
+simplilearn-phase1/terraformisation/terraform.tfstate
+simplilearn-phase1/terraformisation/terraform.tfstate.backup

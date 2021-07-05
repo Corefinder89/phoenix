@@ -1,20 +1,82 @@
-terraform {
-  required_providers{
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.27"
-    }
-  }
-
-  required_version = ">= 0.14.9"
+variable private_key_path{
+  description = "Path to the SSH private key to be used for authentication"
+  default = "~/.ssh/id_rsa"
 }
 
-provider "aws"{
-  profile = "personal"
+variable public_key_path{
+  description = "Path to the SSH public key to be used for authentication"
+  default = "~/.ssh/id_rsa.pub"
+}
+
+resource "aws_key_pair" "aws_21" {
+  key_name   = "aws_21"               # key pair name AWS
+  public_key = "${file(var.public_key_path)}"
+}
+
+resource "aws_security_group" "terraform_21" {
+  name        = "terraform_21"
+  description = "Used in the terraform"
+
+  # SSH access from anywhere
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # HTTP access from the internet
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # outbound internet access
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+provider "aws" {
+  profile = "default"
   region  = "ap-south-1"
 }
 
-resource "aws_instance" "terraformvm"{
+resource "aws_instance" "terraformvm" {
+  # This is the ami for ubuntu server
   ami           = "ami-0c1a7f89451184c8b"
   instance_type = "t2.micro"
+
+  key_name = "${aws_key_pair.aws_21.id}"
+
+  vpc_security_group_ids = ["${aws_security_group.terraform_21.id}"]
+
+   # install jenkins, java and python
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt-get -y update",
+      "sudo apt install wget",
+      "sudo apt-get -y install openjdk-8-jre-headless",
+      "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
+      "sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
+      "sudo apt-get update && sudo apt-get install jenkins -y",
+      "sudo apt-get install -y python3-pip"
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = "${file(var.private_key_path)}"
+  }
+
+  tags = {
+    Name = "terraformvm"
+  }
 }
