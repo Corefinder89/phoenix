@@ -4,3 +4,6 @@ simplilearn-phase1/terraformisation/.terraform.tfstate.lock.info
 simplilearn-phase1/terraformisation/.terraform/
 simplilearn-phase1/terraformisation/terraform.tfstate
 simplilearn-phase1/terraformisation/terraform.tfstate.backup
+simplilearn-phase1/terraformisation (Project-2)/.terraform.lock.hcl
+simplilearn-phase1/terraformisation (Project-2)/.terraform/providers/registry.terraform.io/hashicorp/aws/3.48.0/darwin_amd64/terraform-provider-aws_v3.48.0_x5
+simplilearn-phase1/terraformisation (Project-2)/terraform.tfstate
