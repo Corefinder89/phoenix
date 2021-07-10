@@ -7,3 +7,5 @@ This is a documentation which demonstrates IaC (Infrastructure as Code) and its 
 - [What is infrastructure as code (IaC) ?](docs/IaC_intro.md)
 - [How does IaC work?](docs/IaC_workprocess.md)
 - [Terraform](docs/terraform.md)
+- [Problem statement](docs/problemstatement.md)
+- [Project specification](docs/Simplilearn-TF-P2-ProjectSpecification.pdf)
