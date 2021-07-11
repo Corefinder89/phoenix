@@ -30,3 +30,4 @@ COPY /app /app
 WORKDIR /app
 RUN yarn install
 RUN ng build
+CMD ["ng","serve","--host", "0.0.0.0"]
