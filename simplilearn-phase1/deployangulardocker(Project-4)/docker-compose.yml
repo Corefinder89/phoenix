@@ -5,7 +5,7 @@ services:
             args:
                 version: 0.0.1
             context: .
-            dockerfile: Dockerfile
+            dockerfile: web/Dockerfile
         expose:
             - 4200
         ports:
