@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+    web:
+        build:
+            args:
+                version: 0.0.1
+            context: .
+            dockerfile: Dockerfile
+        expose:
+            - 4200
+        ports:
+            - "4200:4200"
