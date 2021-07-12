@@ -1,2 +1,3 @@
 angular-app = https://github.com/gothinkster/angular-realworld-example-app
 dockerfile = https://dev.to/vanwildemeerschbrent/docker-angular-setup-issue-exposed-port-not-accessible-98m
+java_app = https://dzone.com/articles/using-docker-to-deploy-a-containerized-java-web-app
