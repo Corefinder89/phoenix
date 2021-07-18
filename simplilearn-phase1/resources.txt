@@ -1,3 +1,8 @@
 angular-app = https://github.com/gothinkster/angular-realworld-example-app
 dockerfile = https://dev.to/vanwildemeerschbrent/docker-angular-setup-issue-exposed-port-not-accessible-98m
 python_flask_app = https://docs.docker.com/engine/swarm/stack-deploy/
+
+web_cont_id=`docker ps -aqf "name=appstack_web_1"`
+redis_cont_id=`docker ps -aqf "name=appstack_redis_1"`
+docker kill $redis_cont_id
+docker kill $web_cont_id
