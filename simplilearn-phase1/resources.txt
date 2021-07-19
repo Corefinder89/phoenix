@@ -6,3 +6,6 @@ web_cont_id=`docker ps -aqf "name=appstack_web_1"`
 redis_cont_id=`docker ps -aqf "name=appstack_redis_1"`
 docker kill $redis_cont_id
 docker kill $web_cont_id
+
+java_spring_app = https://octopus.com/blog/java-ci-cd-co/from-jar-to-docker
+CI-CD = https://dzone.com/articles/java-cicd-from-local-build-to-jenkins-continuous-i
