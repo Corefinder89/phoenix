@@ -41,10 +41,10 @@
       notify: Reload Apache
       tags: [ apache ]
 
-    - name: Enable new site
-      shell: /usr/sbin/a2ensite {{ http_conf }}
-      notify: Reload Apache
-      tags: [ apache ]
+    # - name: Enable new site
+    #   shell: /usr/sbin/a2ensite {{ http_conf }}
+    #   notify: Reload Apache
+    #   tags: [ apache ]
 
     - name: Disable default Apache site
       shell: /usr/sbin/a2dissite 000-default.conf
