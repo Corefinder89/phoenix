@@ -36,6 +36,16 @@
       notify: Reload Apache
       tags: [ apache ]
 
+    - name: Enable rewrite module
+      shell: /usr/sbin/a2enmod rewrite
+      notify: Reload Apache
+      tags: [ apache ]
+
+    - name: Enable new site
+      shell: /usr/sbin/a2ensite {{ http_conf }}
+      notify: Reload Apache
+      tags: [ apache ]
+
   # MySQL Configuration
     - name: Set the root password
       mysql_user:
