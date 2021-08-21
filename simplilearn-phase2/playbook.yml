@@ -109,7 +109,8 @@
       shell: "/usr/bin/find /srv/www/wordpress/ -type f -exec chmod 640 {} \\;"
       tags: [ wordpress ]
 
-    - name: Set up wp-config
+    - name: Set up wp config
+      template:
         src: "files/wp-config.php.j2"
         dest: "/srv/www/wordpress/wp-config.php"
       tags: [ wordpress ]
