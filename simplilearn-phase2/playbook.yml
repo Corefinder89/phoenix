@@ -83,14 +83,6 @@
         login_password: "{{ mysql_root_password }}"
       tags: [ mysql ]
 
-  # UFW Configuration
-    - name: "UFW - Allow HTTP on port {{ http_port }}"
-      ufw:
-        rule: allow
-        port: "{{ http_port }}"
-        proto: tcp
-      tags: [ system ]
-
   # WordPress Configuration
     - name: Download and unpack latest WordPress
       unarchive:
@@ -102,7 +94,7 @@
 
     - name: Set ownership
       file:
-        path: "/srv/www/wordpress"
+        path: "/srv/www"
         state: directory
         recurse: yes
         owner: www-data
@@ -118,9 +110,8 @@
       tags: [ wordpress ]
 
     - name: Set up wp-config
-      template:
         src: "files/wp-config.php.j2"
-        dest: "/srv/www/wordpress/wp-config-sample.php"
+        dest: "/srv/www/wordpress/wp-config.php"
       tags: [ wordpress ]
 
   handlers:
