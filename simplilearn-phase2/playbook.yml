@@ -11,7 +11,7 @@
 
     - name: Install LAMP Packages
       apt: name={{ item }} update_cache=yes state=latest
-      loop: [ 'apache2', 'mysql-server', 'python3-pymysql', 'php', 'php-mysql', 'libapache2-mod-php' ]
+      loop: [ 'apache2', 'mysql-server', 'php' ]
       tags: [ system ]
 
     - name: Install PHP Extensions
@@ -22,33 +22,18 @@
   # Apache Configuration
     - name: Create document root
       file:
-        path: "/var/www/{{ http_host }}"
+        path: "/srv/www/wordpress"
         state: directory
         owner: "www-data"
         group: "www-data"
         mode: '0755'
       tags: [ apache ]
 
-    - name: Set up Apache VirtualHost
+    - name: Set up Apache
       template:
         src: "files/apache.conf.j2"
-        dest: "/etc/apache2/sites-available/{{ http_conf }}"
+        dest: "/etc/apache2/sites-available/wordpress.conf"
       notify: Reload Apache
-      tags: [ apache ]
-
-    - name: Enable rewrite module
-      shell: /usr/sbin/a2enmod rewrite
-      notify: Reload Apache
-      tags: [ apache ]
-
-    # - name: Enable new site
-    #   shell: /usr/sbin/a2ensite {{ http_conf }}
-    #   notify: Reload Apache
-    #   tags: [ apache ]
-
-    - name: Disable default Apache site
-      shell: /usr/sbin/a2dissite 000-default.conf
-      notify: Restart Apache
       tags: [ apache ]
 
   # MySQL Configuration
@@ -110,14 +95,14 @@
     - name: Download and unpack latest WordPress
       unarchive:
         src: https://wordpress.org/latest.tar.gz
-        dest: "/var/www/{{ http_host }}"
+        dest: "/srv/www"
         remote_src: yes
-        creates: "/var/www/{{ http_host }}/wordpress"
+        creates: "/srv/www/wordpress"
       tags: [ wordpress ]
 
     - name: Set ownership
       file:
-        path: "/var/www/{{ http_host }}"
+        path: "/srv/www/wordpress"
         state: directory
         recurse: yes
         owner: www-data
@@ -125,17 +110,17 @@
       tags: [ wordpress ]
 
     - name: Set permissions for directories
-      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type d -exec chmod 750 {} \\;"
+      shell: "/usr/bin/find /srv/www/wordpress/ -type d -exec chmod 750 {} \\;"
       tags: [ wordpress ]
 
     - name: Set permissions for files
-      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type f -exec chmod 640 {} \\;"
+      shell: "/usr/bin/find /srv/www/wordpress/ -type f -exec chmod 640 {} \\;"
       tags: [ wordpress ]
 
     - name: Set up wp-config
       template:
         src: "files/wp-config.php.j2"
-        dest: "/var/www/{{ http_host }}/wordpress/wp-config.php"
+        dest: "/srv/www/wordpress/wp-config-sample.php"
       tags: [ wordpress ]
 
   handlers:
