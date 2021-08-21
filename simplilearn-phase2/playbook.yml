@@ -42,7 +42,7 @@
       tags: [ apache ]
 
     - name: Enable new site
-      shell: /usr/sbin/a2ensite {{ http_conf }}
+      shell: /usr/sbin/a2ensite wordpress
       notify: Reload Apache
       tags: [ apache ]
 
