@@ -83,6 +83,7 @@
         state: present
         login_user: root
         login_password: "{{ mysql_root_password }}"
+      no_log: true
       tags: [ mysql ]
 
     - name: Create MySQL user for WordPress
@@ -99,9 +100,9 @@
     - name: Download and unpack latest WordPress
       unarchive:
         src: https://wordpress.org/latest.tar.gz
-        dest: "/srv/www/wordpress/"
+        dest: "/srv/www/"
         remote_src: yes
-        creates: "/srv/www/wordpress"
+        creates: "/srv/www/"
       tags: [ wordpress ]
 
     - name: Set ownership
