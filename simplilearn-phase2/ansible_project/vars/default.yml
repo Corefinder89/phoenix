@@ -24,6 +24,6 @@ mysql_user: "airdroid"
 mysql_password: "corefinder89"
 
 #HTTP Settings
-http_host: "127.0.0.1"
-http_conf: "default"
+http_host: "104.43.225.37"
+http_conf: "104.43.225.37.conf"
 http_port: "80"

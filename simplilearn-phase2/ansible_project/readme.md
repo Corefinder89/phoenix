@@ -19,4 +19,6 @@ server1 | SUCCESS => {
     "ping": "pong"
 }
 
-stp-7: run ansible playbook ansible-playbook playbook.yml -i inventory.ini
+stp-7: Get public ip of vm -> dig +short myip.opendns.com @resolver1.opendns.com
+
+stp-8: run ansible playbook ansible-playbook playbook.yml -i inventory.ini

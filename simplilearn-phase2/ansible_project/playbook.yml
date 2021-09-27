@@ -11,7 +11,7 @@
 
     - name: Install LAMP Packages
       apt: name={{ item }} update_cache=yes state=latest
-      loop: [ 'apache2', 'mysql-server', 'php', 'python3-pymysql' ]
+      loop: [ 'apache2', 'mysql-server', 'php', 'python-pymysql' ]
       tags: [ system ]
 
     - name: Install PHP Extensions
@@ -22,7 +22,7 @@
   # Apache Configuration
     - name: Create document root
       file:
-        path: "/srv/www/wordpress"
+        path: "/var/www/{{ http_host }}"
         state: directory
         owner: "www-data"
         group: "www-data"
@@ -32,7 +32,7 @@
     - name: Set up Apache
       template:
         src: "files/apache.conf.j2"
-        dest: "/etc/apache2/sites-available/wordpress.conf"
+        dest: "/etc/apache2/sites-available/{{ http_conf }}"
       notify: Reload Apache
       tags: [ apache ]
 
@@ -42,12 +42,17 @@
       tags: [ apache ]
 
     - name: Enable new site
-      shell: /usr/sbin/a2ensite wordpress
+      shell: /usr/sbin/a2ensite {{ http_conf }}
       notify: Reload Apache
       tags: [ apache ]
 
+    - name: Disable default Apache site
+      shell: /usr/sbin/a2dissite 000-default.conf
+      notify: Restart Apache
+      tags: [ apache ]
+
   # MySQL Configuration
-    - name: Set the root password
+    - name: Set the root password for database
       mysql_user:
         login_host: "localhost"
         login_user: "root"
@@ -56,7 +61,6 @@
         password: "{{ mysql_root_password }}"
         login_unix_socket: /var/run/mysqld/mysqld.sock
         state: present
-      no_log: true
       tags: [ mysql, mysql-root ]
 
     - name: Remove all anonymous user accounts
@@ -66,7 +70,6 @@
         state: absent
         login_user: root
         login_password: "{{ mysql_root_password }}"
-      no_log: true
       tags: [ mysql ]
 
     - name: Remove the MySQL test database
@@ -83,7 +86,6 @@
         state: present
         login_user: root
         login_password: "{{ mysql_root_password }}"
-      no_log: true
       tags: [ mysql ]
 
     - name: Create MySQL user for WordPress
@@ -96,18 +98,26 @@
         login_password: "{{ mysql_root_password }}"
       tags: [ mysql ]
 
+  # UFW Configuration
+    - name: "UFW - Allow HTTP on port {{ http_port }}"
+      ufw:
+        rule: allow
+        port: "{{ http_port }}"
+        proto: tcp
+      tags: [ system ]
+
   # WordPress Configuration
     - name: Download and unpack latest WordPress
       unarchive:
         src: https://wordpress.org/latest.tar.gz
-        dest: "/srv/www/"
+        dest: "/var/www/{{ http_host }}"
         remote_src: yes
-        creates: "/srv/www/"
+        creates: "/var/www/{{ http_host }}/wordpress"
       tags: [ wordpress ]
 
     - name: Set ownership
       file:
-        path: "/srv/www"
+        path: "/var/www/{{ http_host }}"
         state: directory
         recurse: yes
         owner: www-data
@@ -115,17 +125,17 @@
       tags: [ wordpress ]
 
     - name: Set permissions for directories
-      shell: "/usr/bin/find /srv/www/wordpress/ -type d -exec chmod 777 {} \\;"
+      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type d -exec chmod 755 {} \\;"
       tags: [ wordpress ]
 
     - name: Set permissions for files
-      shell: "/usr/bin/find /srv/www/wordpress/ -type f -exec chmod 777 {} \\;"
+      shell: "/usr/bin/find /srv/www/wordpress/ -type f -exec chmod 640 {} \\;"
       tags: [ wordpress ]
 
     - name: Set up wp config
       template:
         src: "files/wp-config.php.j2"
-        dest: "/srv/www/wordpress/wp-config.php"
+        dest: "/var/www/{{ http_host }}/wordpress/wp-config.php"
       tags: [ wordpress ]
 
   handlers:
