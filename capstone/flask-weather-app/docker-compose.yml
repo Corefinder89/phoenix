@@ -3,4 +3,7 @@ services:
   web:
     build: .
     ports:
-      - "$(echo ${server_ip}):5000:5000"
+      - "5000:5000"
+networks:
+  bridge2:
+    external: true
