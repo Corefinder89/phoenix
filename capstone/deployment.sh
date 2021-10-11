@@ -32,7 +32,7 @@ status=$( sudo docker images -q corefinder/app-runner )
 
 # Check if the app-runner image is already existing
 if [[ -n "$status" ]]; then
-  echo "Container exists"
+  echo "corefinder/app-runner container exists"
 else
   docker build -t corefinder/app-runner app-runner/
 fi
