@@ -56,6 +56,8 @@ then
 else
     ENV="blue"
     OLD="green"
+else
+    ENV="blue"
 fi
 
 echo "Starting "$ENV" container"
