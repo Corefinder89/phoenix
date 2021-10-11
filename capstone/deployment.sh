@@ -48,5 +48,21 @@ fi
 # goto flask weather app
 cd flask-weather-app/
 
-# Run docker compose in the background
-docker-compose up -d
+# Run docker compose in the background based on blue/green deployment flag
+if [ $(docker ps -f name=blue -q) ]
+then
+    ENV="green"
+    OLD="blue"
+else
+    ENV="blue"
+    OLD="green"
+fi
+
+echo "Starting "$ENV" container"
+docker-compose --project-name=$ENV up -d
+
+echo "Waiting..."
+sleep 5s
+
+echo "Stopping "$OLD" container"
+docker-compose --project-name=$OLD stop
