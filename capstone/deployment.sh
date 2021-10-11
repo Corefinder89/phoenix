@@ -49,15 +49,13 @@ fi
 cd flask-weather-app/
 
 # Run docker compose in the background based on blue/green deployment flag
-if [ $(docker ps -f name=blue -q) ]
+if [ $(docker ps -f name=blue -q) ];
 then
     ENV="green"
     OLD="blue"
 else
     ENV="blue"
     OLD="green"
-else
-    ENV="blue"
 fi
 
 echo "Starting "$ENV" container"
