@@ -3,7 +3,5 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
-networks:
-  bridge2:
-    external: true
+      - "0.0.0.0:5000:5000"
+    network_mode: "bridge"

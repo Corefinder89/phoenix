@@ -14,7 +14,7 @@ if [ -z ${server_ip} ];
 then
     export server_ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
 else
-    echo "environmetn variable already present"
+    echo "environment variable already present"
 fi
 
 # goto flask weather app
