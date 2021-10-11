@@ -48,6 +48,10 @@ fi
 # goto flask weather app
 cd flask-weather-app/
 
+# Run docker compose build to build the services web and test
+docker-compose build
+echo "Running compose build"
+
 # Run docker compose in the background based on blue/green deployment flag
 if [ $(docker ps -f name=blue -q) ];
 then
