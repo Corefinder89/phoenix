@@ -58,11 +58,11 @@ else
     OLD="green"
 fi
 
-echo "Starting "$ENV" container"
-docker-compose --project-name=$ENV up -d
+echo "Stopping "$OLD" container"
+docker-compose --project-name=$OLD stop
 
 echo "Waiting..."
 sleep 5s
 
-echo "Stopping "$OLD" container"
-docker-compose --project-name=$OLD stop
+echo "Starting "$ENV" container"
+docker-compose --project-name=$ENV up -d
