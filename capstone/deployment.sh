@@ -65,10 +65,19 @@ else
 fi
 
 echo "Stopping "$OLD" container ...."
-docker-compose --project-name=$OLD stop
+docker-compose --project-name=$OLD stop 
+
+echo "Waiting ...."
+sleep 8s
+
+echo "deleting "$OLD" container"
+docker rm $(docker ps -aqf "name="$OLD"")
 
 echo "Waiting ...."
 sleep 5s
+
+echo "deleting "$OLD" images"
+docker rmi -f $(docker images | grep $OLD)
 
 echo "Starting "$ENV" container ...."
 docker-compose --project-name=$ENV up -d
