@@ -1,0 +1,35 @@
+apiVersion: launchpad.mirantis.com/mke/v1.4
+kind: mke
+metadata:
+  name: my-mke-cluster
+spec:
+  hosts:
+  - ssh:
+      address: 172.31.19.58
+      user: root
+      port: 22
+      keyPath: ~/.ssh/id_rsa
+    role: manager
+  - ssh:
+      address: 172.31.16.36
+      user: root
+      port: 22
+      keyPath: ~/.ssh/id_rsa
+    role: worker
+  - ssh:
+      address: 172.31.22.62
+      user: root
+      port: 22
+      keyPath: ~/.ssh/id_rsa
+    role: worker
+  mke:
+    version: 3.4.6
+    adminUsername: admin
+    adminPassword: admin1234
+    installFlags:
+         - --force-minimums
+         - --default-node-orchestrator=kubernetes
+  mcr:
+    version: 20.10.0
+  cluster:
+    prune: false
