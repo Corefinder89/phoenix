@@ -58,7 +58,7 @@ api-resource type include `['nodes', 'pods', 'secrets', 'configmap', 'deployment
 
 ### Examples
 
-- If I want to get the details of a node then we can run the command 
+- If I want to get the details of a node then we can run the command
 `kubectl get nodes control-plane -o wide`.
 - If I want to get the details of all the nodes we can run the command \
 `kubectl get nodes -o wide`.
@@ -122,4 +122,4 @@ To access the application of a pod you can do a curl to the ip address of the po
 
 ## Creating a pod with multiple containers
 
-Multi container pod cannot be created in the imperative way. To run multiple containers we need to write a declarative manifest. 
+Multi container pod cannot be created in the imperative way. To run multiple containers we need to write a declarative manifest.
