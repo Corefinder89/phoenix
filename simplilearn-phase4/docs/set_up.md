@@ -28,12 +28,12 @@ If you need to give a specific name to the worker nodes run the command \
 - To check whether the nodes and the control-plane is functional run the command \
 `kubectl get nodes`
 
-![get_nodes](snapshots/kubectl_get_nodes.png)
+![get_nodes](../snapshots/kubectl_get_nodes.png)
 
 - Next install container network interface on master node. Run command \
 `kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml`. The status of the nodes should change to `READY`.
 
-![node_status](snapshots/nodes_status_ready.png)
+![node_status](../snapshots/nodes_status_ready.png)
 
 - Optionally if you want to enable the auto complete option for kubectl run the command \
 ```bash
@@ -42,7 +42,7 @@ source ~/.bashrc
 ```
 Run the command `kubectl` and press tab to see the auto completion options are being shown or not.
 
-![auto_completion](snapshots/auto_completion.png)
+![auto_completion](../snapshots/auto_completion.png)
 
 ## Kubectl syntax format
 
@@ -71,17 +71,26 @@ Kubernetes manages or deploys a application as an `api-resource` called as `pod`
 `kubectl run nginx --image nginx --port 80` \
 The syntax comprises of the `pod` name and the underlying container type which is specified with the option `--image` and the port which needs to be exposed can be mentioned with the option `--port`.
 
-![create_pod](snapshots/pod_created.png)
+![create_pod](../snapshots/pod_created.png)
 
 - To check if the pods are created run the command \
 `kubectl get pods` \
 See if the pod created has the status as `RUNNING`.
 
-![get_pods](snapshots/check_pods.png)
+![get_pods](../snapshots/check_pods.png)
 
 - To get details of the pod created run the command \
 `kubectl describe pods nginx`
 
-![descrbe-pods](snapshots/describe-pods.png)
+![descrbe-pods](../snapshots/describe-pods.png)
 
-- 
+### Creating a pod declaratively
+Pods can be created declaratively by creating a `manifest`. Manifest mostly comprises of the pod configurations documented within a `YAML` file. \
+To create a pod run the command `kubectl apply -f mypod.yaml`.
+
+![create-pod-declarative](../snapshots/create_pod_declarative.png)
+
+To get the details of the created pod run the command \
+`kubectl get pods -o wide`
+
+![pod-details](../snapshots/pod_details.png)
