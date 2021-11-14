@@ -94,3 +94,10 @@ To get the details of the created pod run the command \
 `kubectl get pods -o wide`
 
 ![pod-details](../snapshots/pod_details.png)
+
+### Pod configuration template
+
+To create a pod configuration template run the command \
+`kubectl run somepod --image nginx --port 80 --dry-run -o yaml`
+
+![Templating](../snapshots/templating.png)
