@@ -112,3 +112,5 @@ To create a pod configuration template run the command \
 ### Note
 
 To access the application of a pod you can do a curl to the ip address of the pod along with the port which is 80 where the server is running. Just run `curl <pod_ip_addres>:80`
+
+![curl](../snapshots/curl_nginx.png)
