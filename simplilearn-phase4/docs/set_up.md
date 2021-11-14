@@ -13,11 +13,13 @@ Run command `sudo su -` on both the worker and the master nodes.
 
 - Run command `kubeadm init --node-name control-plane` to register the master node as the *Kubernetes control plane*.
 - Create the kubeconfig file on master node for kubectl so that kubectl has the information of the cluster.
+
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
 - Alternatively, if you are the root user, you can run the command
 `export KUBECONFIG=/etc/kubernetes/admin.conf` to register the control-plane.  
 - You can join any number of worker nodes by running the following on each as root \
@@ -36,10 +38,12 @@ If you need to give a specific name to the worker nodes run the command \
 ![node_status](../snapshots/nodes_status_ready.png)
 
 - Optionally if you want to enable the auto complete option for kubectl run the command \
+
 ```bash
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 source ~/.bashrc
 ```
+
 Run the command `kubectl` and press tab to see the auto completion options are being shown or not.
 
 ![auto_completion](../snapshots/auto_completion.png)
@@ -63,9 +67,9 @@ api-resource type include `['nodes', 'pods', 'secrets', 'configmap', 'deployment
 
 ## What is a pod ?
 
-Kubernetes manages or deploys a application as an `api-resource` called as `pod`. A pod has an ip address, and many kubernetes specific configurations. A pod is actually and essentially an abstraction or encapsulation on top of containers. Kubernetes creates a pod and inside a pod there is a container. There can be multiple containers tightly coupled inside a pod. In short pod can also be called as *work loads*.
+Kubernetes manages or deploys a application as an `api-resource` called as `pod`. A pod has an ip address, its own network namespace, and many kubernetes specific configurations. A pod is actually and essentially an abstraction or encapsulation on top of containers. Kubernetes creates a pod and inside a pod there is a container. There can be multiple containers tightly coupled inside a pod. In short pod can also be called as *work loads*.
 
-## Setting up a pod 
+## Setting up a pod
 
 A pod can be created in 2 ways:
 
@@ -92,6 +96,7 @@ See if the pod created has the status as `RUNNING`.
 ![descrbe-pods](../snapshots/describe-pods.png)
 
 ### Creating a pod declaratively
+
 Pods can be created declaratively by creating a `manifest`. Manifest mostly comprises of the pod configurations documented within a `YAML` file. \
 To create a pod run the command `kubectl apply -f mypod.yaml`.
 
@@ -114,3 +119,7 @@ To create a pod configuration template run the command \
 To access the application of a pod you can do a curl to the ip address of the pod along with the port which is 80 where the server is running. Just run `curl <pod_ip_addres>:80`
 
 ![curl](../snapshots/curl_nginx.png)
+
+## Creating a pod with multiple containers
+
+Multi container pod cannot be created in the imperative way. To run multiple containers we need to write a declarative manifest. 
