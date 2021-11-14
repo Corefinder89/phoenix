@@ -67,6 +67,13 @@ Kubernetes manages or deploys a application as an `api-resource` called as `pod`
 
 ## Setting up a pod 
 
+A pod can be created in 2 ways:
+
+- Imperatively
+- Declaratively
+
+### Creating a pod imperatively
+
 - To create a pod run the command \
 `kubectl run nginx --image nginx --port 80` \
 The syntax comprises of the `pod` name and the underlying container type which is specified with the option `--image` and the port which needs to be exposed can be mentioned with the option `--port`.
@@ -101,3 +108,7 @@ To create a pod configuration template run the command \
 `kubectl run somepod --image nginx --port 80 --dry-run -o yaml`
 
 ![Templating](../snapshots/templating.png)
+
+### Note
+
+To access the application of a pod you can do a curl to the ip address of the pod along with the port which is 80 where the server is running. Just run `curl <pod_ip_addres>:80`
