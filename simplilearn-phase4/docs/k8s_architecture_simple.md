@@ -1,4 +1,4 @@
-# Kubernetes architecture
+# Kubernetes architecture [A simplified explanation]
 
 ## Considerations
 
@@ -59,7 +59,7 @@ The API server receives the request and understands that it has to perform some 
 
 The controller manager manages the controllers.
 
-![k8s_architecture](../snapshots/k8s_architecture.drawio.png)
+![k8s_architecture](../snapshots/k8s_architecture_simple.png)
 
 ## Note
 

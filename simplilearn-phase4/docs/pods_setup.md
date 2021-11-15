@@ -30,7 +30,7 @@ See if the pod created has the status as `RUNNING`.
 
 ![descrbe-pods](../snapshots/describe-pods.png)
 
-### Creating a pod declaratively
+### Creating a pod declaratively with a single container
 
 Pods can be created declaratively by creating a `manifest`. Manifest mostly comprises of the pod configurations documented within a `YAML` file. \
 To create a pod run the command `kubectl apply -f mypod.yaml`.
@@ -41,6 +41,14 @@ To get the details of the created pod run the command \
 `kubectl get pods -o wide`
 
 ![pod-details](../snapshots/pod_details.png)
+
+[declaratively creating a single container pod](../pod-configurations/pod_single_container.yaml)
+
+## Creating a pod declaratively with multiple containers
+
+Multi container pod cannot be created in the imperative way. To run multiple containers we need to write a declarative manifest.
+
+[declaratively creating a multiple container pod](../pod-configurations/pod_multiple_container.yaml)
 
 ### Pod configuration template
 
