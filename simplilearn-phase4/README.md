@@ -45,7 +45,7 @@
 
 ## Doc references
 
-- [Kubernetes architecture](docs/architecture.md)
-- [Pod configurations](docs/pod_config.md)
-- [Setting up clusters and pods](docs/set_up.md)
 - [Orchestration](docs/orchestration.md)
+- [Kubernetes architecture](docs/architecture.md)
+- [Pod configurations](docs/pods_setup.md)
+- [Setting up a k8s cluster](docs/k8s_cluster_setup.md.md)

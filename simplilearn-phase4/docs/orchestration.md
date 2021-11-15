@@ -7,4 +7,3 @@
 - Self healing
 - High availability
 - Scalability
- 
