@@ -16,4 +16,4 @@ This repo is basically all in devops related stuff that can be used to enhance s
 
 ## Cohort ~ 4
 
-- [Container orchestration using kubernetes](simplilearn-phase4/readme.md)
+- [Container orchestration using kubernetes](simplilearn-phase4/README.md)
