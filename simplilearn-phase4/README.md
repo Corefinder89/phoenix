@@ -46,6 +46,7 @@
 ## Doc references
 
 - [Orchestration](docs/orchestration.md)
+- [Kubernetes - brief](docs/kubernetes.md)
 - [Kubernetes architecture explained](docs/k8s_architecture_explained.md)
 - [Kubernetes architecture simplified](docs/k8s_architecture_simple.md)
 - [Pod configurations](docs/pods_setup.md)
