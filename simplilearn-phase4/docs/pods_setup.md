@@ -66,3 +66,16 @@ To access the application of a pod you can do a curl to the ip address of the po
 ## Creating a pod with multiple containers
 
 Multi container pod cannot be created in the imperative way. To run multiple containers we need to write a declarative manifest.
+
+To check if the pod is created run the following
+
+```bash
+kubectl get pods
+kubectl describe pods <pod-name>
+```
+
+To validate check if the two containers are running within the pod
+
+![multi-container](../snapshots/multi-container.png)
+
+To access the application running on one container in the browser hit the ip-address of the pod and the port of the container.
