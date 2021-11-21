@@ -29,18 +29,11 @@ To get the default labels for all pods run the command \
 
 ![labels-pods](../snapshots/pods-labels.png)
 
-
 ### Applying a label to a node declaratively
 
 `kubectl label node ip-172-31-19-190 proxima=`
 
 ![label-worker-node](../snapshots/label-node-ip-172-31-19-190.png)
-
-### Selecting a node based on label
-
-`kubectl get nodes -l proxima -o wide`
-
-![get-nodes-labels](../snapshots/get-nodes-labels.png)
 
 ### Remove a label from a node
 
@@ -55,3 +48,37 @@ If a label already exist for a node it cannot be overriden until the `overwrite`
 `kubectl label node ip-172-31-19-190 proxima= --overwrite`
 
 ![overwrite-label](../snapshots/overwrite-label.png)
+
+### Apply a label to all the nodes
+
+To apply a label to all the nodes use the `--all` flag to apply a label to all the nodes
+
+`kubectl label nodes --all environment=redama`
+
+![label-allnodes](../snapshots/label-allnodes.png)
+
+### Update a label
+
+To update a label value run the following \
+
+`kubectl label node ip-172-31-19-190 --overwrite environment=redama.au`
+
+![label-update](../snapshots/update-label.png)
+
+## Selector
+
+This operation is related to selecting labels associated to a resource
+
+### Selecting a node based on label
+
+`kubectl get nodes -l proxima -o wide`
+
+![get-nodes-labels](../snapshots/get-nodes-labels.png)
+
+### Selecting all nodes based on a label
+
+To select all the nodes based on a label run \
+
+`kubectl get nodes -l environment=redama -o wide`
+
+![nodes-label-select](../snapshots/nodes-label-select.png)
