@@ -51,3 +51,4 @@
 - [Kubernetes architecture simplified](docs/k8s_architecture_simple.md)
 - [Pod configurations](docs/pods_setup.md)
 - [Setting up a k8s cluster](docs/k8s_cluster_setup.md.md)
+- [Selectors & labels](docs/labels-selectors.md)
