@@ -1,6 +1,6 @@
 # Table of contents
 
-## Cohort session 1
+## Cohort 4 session 1
 
 - CKA exam
 - Container orchestration
@@ -22,7 +22,7 @@
   - Declarative
   - Access app
 
-## Cohort session 2
+## Cohort 4 session 2
 
 - Multi-container
 - Namespaces
@@ -34,7 +34,7 @@
 - Logs
 - Exec
 
-## Cohort session 3
+## Cohort 4 session 3
 
 - Pod customization
 - Controllers
