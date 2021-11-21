@@ -84,3 +84,5 @@ After this do a `kubectl get pods -A` to check whether the pod has been allocate
 ### Delete pods from a namespace
 
 To delete pods from a namespace run the command `kubectl delete namespaces <namespace>`.
+
+If a namespace is deleted all resources associated with a namespace will be removed. 
